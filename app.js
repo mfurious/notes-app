@@ -1,21 +1,81 @@
-//modules and packages
+//Core modules
+const fs = require("fileSystem")
+
+
+//NPM Modules
+const yargs = require('yargs')
 const chalk = require('chalk')
 const getNotes = require('./src/notes.js')
-const print = console.log
-//color coding for the console feedback
-const succesMsg = chalk.green.bold
-const errorMsg = chalk.redBright.bold
-const warningMsg = chalk.yellowBright.bold
 
-let input = process.argv[2]
-const msg = getNotes()
-print(msg)
+// set yargs version
+yargs.version('0.0.2')
 
-//Just a funny test script
-if (input === "Mike") {
-    print(succesMsg('Succes!'))
-} else if (input === "Robin"){
-    print(warningMsg("Warning!"))
-} else {
-    print(errorMsg("Error!"))
-}
+//Create an add command
+yargs.command({
+    command: 'add',
+    describe: 'Add a new note',
+    builder: {
+        title: {
+            alias: 't',
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        },
+        body: {
+            alias: 'b',
+            describe: 'Note body',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function(argv){
+        console.log('Adding: ')
+        console.log(chalk.greenBright('Title: ' + argv.title))
+        console.log(chalk.blueBright('body: ' + argv.body))
+    }
+})
+
+//Create an remove command
+yargs.command({
+    command: 'remove',
+    describe: 'Remove an excisting note',
+    builder: {
+        title: {
+            alias: 't',
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function(argv){
+        console.log(chalk.redBright('Removing: ' + argv.title))
+    }
+})
+
+//Create an read command
+yargs.command({
+    command: 'read',
+    describe: 'Reads an excisting note',
+    builder: {
+        title: {
+            alias: 't',
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function(argv){
+        console.log(chalk.blueBright('Reading: ' + argv.title))
+    }
+})
+
+//Create an list command
+yargs.command({
+    command: 'list',
+    describe: 'Lists all excisting notes',
+    handler: function(){
+        console.log(chalk.blueBright('Listing all excisting notes...'))
+    }
+})
+
+yargs.parse()
