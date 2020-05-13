@@ -11,7 +11,7 @@ let input = process.argv[2]
 const msg = getNotes()
 print(msg)
 
-
+//Just a funny test script
 if (input === "Mike") {
     print(succesMsg('Succes!'))
 } else if (input === "Robin"){
