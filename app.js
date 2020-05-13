@@ -7,10 +7,15 @@ const succesMsg = chalk.green.bold
 const errorMsg = chalk.redBright.bold
 const warningMsg = chalk.yellowBright.bold
 
+let input = process.argv[2]
 const msg = getNotes()
 print(msg)
 
-print(succesMsg('Succes!'))
-print(warningMsg("Warning!"))
-print(errorMsg("Error!"))
 
+if (input === "Mike") {
+    print(succesMsg('Succes!'))
+} else if (input === "Robin"){
+    print(warningMsg("Warning!"))
+} else {
+    print(errorMsg("Error!"))
+}
