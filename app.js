@@ -1,11 +1,11 @@
 //Core modules
-const fs = require("fileSystem")
+const fs = require("fs")
 
 
 //NPM Modules
 const yargs = require('yargs')
 const chalk = require('chalk')
-const getNotes = require('./src/notes.js')
+const note = require('./src/notes.js')
 
 // set yargs version
 yargs.version('0.0.2')
@@ -29,6 +29,7 @@ yargs.command({
         }
     },
     handler: function(argv){
+        note.addNote(argv.title, argv.body)
         console.log('Adding: ')
         console.log(chalk.greenBright('Title: ' + argv.title))
         console.log(chalk.blueBright('body: ' + argv.body))
