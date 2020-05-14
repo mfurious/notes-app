@@ -5,7 +5,7 @@ const fs = require("fs")
 //NPM Modules
 const yargs = require('yargs')
 const chalk = require('chalk')
-const note = require('./src/notes.js')
+const notes = require('./src/notes.js')
 
 // set yargs version
 yargs.version('0.0.2')
@@ -29,10 +29,7 @@ yargs.command({
         }
     },
     handler: function(argv){
-        note.addNote(argv.title, argv.body)
-        console.log('Adding: ')
-        console.log(chalk.greenBright('Title: ' + argv.title))
-        console.log(chalk.blueBright('body: ' + argv.body))
+        notes.addNote(argv.title, argv.body)
     }
 })
 
@@ -49,7 +46,7 @@ yargs.command({
         }
     },
     handler: function(argv){
-        console.log(chalk.redBright('Removing: ' + argv.title))
+        notes.removeNote(argv.title)
     }
 })
 
