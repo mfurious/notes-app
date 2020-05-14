@@ -46,12 +46,7 @@ yargs.command({
         }
     },
     handler: function(argv){
-<<<<<<< HEAD
         notes.removeNote(argv.title)
-=======
-        note.removeNote(argv.title)
-
->>>>>>> 8fb96aa41be3ee9fcf6daa0d9412ba575cb32200
     }
 })
 
