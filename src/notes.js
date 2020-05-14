@@ -7,16 +7,15 @@ const getNotes = () => {
 
 const addNote = (title, body) => {
     const notes = loadNotes()
-    const duplicateNotes = notes.filter(function (note) {
-        return note.title === title
-    })
+    const duplicateNote = notes.find((note) => note.title === title)
 
-    if (duplicateNotes.length === 0){
+    if (!duplicateNote) {
         notes.push({
             title: title,
             body: body
         })
        saveNotes(notes)
+        sysmes.acceptMessage('The Note has been added')
     } else {
         sysmes.errorMessage('this note is already taken')
     }
@@ -30,9 +29,7 @@ const saveNotes = (notes) => {
 
 const removeNote = (title) => {
     const notes = loadNotes()
-    const notesToKeep = notes.filter(function (note) {
-        return note.title !== title
-    })
+    const notesToKeep = notes.filter((note) => note.title !== title)
     
     if (notesToKeep < notes) {
         sysmes.acceptMessage(`The note has been removed.`)
@@ -45,22 +42,18 @@ const removeNote = (title) => {
 
 const listNotes = () => {
     const notes = loadNotes()
-    let i = 0
-    while (i < notes.length){
-        sysmes.listHeader(notes[i].title)
-        sysmes.listBody(notes[i].body)
-        i++
-    }
+    notes.forEach(note => {
+        sysmes.listHeader(note.title)
+    })
 }
 
 const readNote = (title) => {
     const notes = loadNotes()
-    const selectedNote = notes.filter(function (note) {
-        return note.title === title
-    })
-
-    if (selectedNote.length !== 0) {
-        console.log(selectedNote)
+    const selectedNote = notes.find(note => note.title === title)
+    
+    if (selectedNote) {
+        sysmes.listHeader(selectedNote.title)
+        sysmes.listBody(selectedNote.body)
     } else {
        sysmes.errorMessage("This node does noet exist")
     }
