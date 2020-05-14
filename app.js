@@ -63,7 +63,7 @@ yargs.command({
         }
     },
     handler: function(argv){
-        console.log(chalk.blueBright('Reading: ' + argv.title))
+        notes.readNote(argv.title)
     }
 })
 
@@ -72,7 +72,7 @@ yargs.command({
     command: 'list',
     describe: 'Lists all excisting notes',
     handler: function(){
-        console.log(chalk.blueBright('Listing all excisting notes...'))
+       notes.listNotes()
     }
 })
 
