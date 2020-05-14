@@ -55,7 +55,7 @@ const readNote = (title) => {
         sysmes.listHeader(selectedNote.title)
         sysmes.listBody(selectedNote.body)
     } else {
-       sysmes.errorMessage("This node does noet exist")
+       sysmes.errorMessage("This node does not exist")
     }
     
 }
