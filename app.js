@@ -1,12 +1,10 @@
-//Core modules
-const fs = require("fs")
-
-
 //NPM Modules
 const yargs = require('yargs')
+
+//Source Modules
 const notes = require('./src/notes.js')
 
-// set yargs version
+// sets the app version
 yargs.version('1.0.0')
 
 //Create an add command
