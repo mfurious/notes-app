@@ -1,6 +1,8 @@
+//System modules
 const fs = require('fs')
 const sysmes = require('./sysmes')
 
+//function to add notes
 const addNote = (title, body) => {
     const notes = loadNotes()
     const duplicateNote = notes.find((note) => note.title === title)
@@ -11,18 +13,13 @@ const addNote = (title, body) => {
             body: body
         })
        saveNotes(notes)
-        sysmes.acceptMessage('The Note has been added')
+        sysmes.acceptMessage('The Note has been added.')
     } else {
-        sysmes.errorMessage('this note is already taken')
+        sysmes.errorMessage('This note is already taken.')
     }
 } 
 
-
-const saveNotes = (notes) => {
-    const data = JSON.stringify(notes)
-    fs.writeFileSync('notes.json', data)
-}
-
+//Function to remove notes
 const removeNote = (title) => {
     const notes = loadNotes()
     const notesToKeep = notes.filter((note) => note.title !== title)
@@ -33,16 +30,9 @@ const removeNote = (title) => {
     } else {
         sysmes.errorMessage('No note has been found!')
     }
-
 }
 
-const listNotes = () => {
-    const notes = loadNotes()
-    notes.forEach(note => {
-        sysmes.listHeader(note.title)
-    })
-}
-
+//Funtion to read notes
 const readNote = (title) => {
     const notes = loadNotes()
     const selectedNote = notes.find(note => note.title === title)
@@ -51,11 +41,20 @@ const readNote = (title) => {
         sysmes.listHeader(selectedNote.title)
         sysmes.listBody(selectedNote.body)
     } else {
-       sysmes.errorMessage("This node does not exist")
-    }
-    
+       sysmes.errorMessage("This node does not exist.")
+    }  
 }
 
+//Function to list notes
+const listNotes = () => {
+    const notes = loadNotes()
+    notes.forEach(note => {
+        sysmes.listHeader(note.title)
+    })
+}
+
+//Multi-use functions
+//Function to load from array
 const loadNotes = () => {
     try {
         const dataBuffer = fs.readFileSync('notes.json')
@@ -63,8 +62,12 @@ const loadNotes = () => {
     } catch (err) {
         return []
     }
+}
 
-
+//function to save to array
+const saveNotes = (notes) => {
+    const data = JSON.stringify(notes)
+    fs.writeFileSync('notes.json', data)
 }
 
 module.exports = {
